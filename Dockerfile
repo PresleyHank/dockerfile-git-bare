@@ -20,8 +20,11 @@ RUN apt-get update --fix-missing && \
     chown -R git:git /home/git && \
     chmod -R 755 /home/git && \
     echo "#!/bin/bash">>/start_ssh.sh && \
-    echo "service ssh start">>/start_ssh.sh && \
-    chmod +x /start_ssh.sh
+    echo "/etc/init.d/ssh start">>/start_ssh.sh && \
+    echo "/bin/bash">>/start_ssh.sh && \
+    chmod +x /start_ssh.sh && \
+    rm -rf /var/lib/apt/lists/*
+
     # fuck 755权限才认
 
 COPY --chown=git:git ./conf/authorized_keys /home/git/.ssh/authorized_keys
@@ -29,4 +32,5 @@ COPY --chown=git:git ./conf/authorized_keys /home/git/.ssh/authorized_keys
 VOLUME ["/app"]
 WORKDIR /
 EXPOSE 22
-CMD ssh start
+# ENTRYPOINT ["sh","-c","/etc/init.d/ssh start"]
+CMD ["sh","-c","/start_ssh.sh"]

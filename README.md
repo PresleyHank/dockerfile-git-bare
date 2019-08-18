@@ -26,16 +26,13 @@
 `docker run -it -p 23:22 -v /var/www:/app awsl /bin/bash`
 
 > 容器内公开22端口， 宿主机可以用其他端口替代。 不建议牺牲宿主机22端口
-
-**4. 启动ssh服务**
-
-`service ssh start`
+> 
+> 自动部署路径 `/app` ，你可以绑定到宿主机的web目录
 
 ok， 你的git地址`ssh://git@{YOUR_HOST}:{23}/home/git/dev.git`
 
-> 空仓库，没有`master`分支 第一次先push
+**提示**: 空仓库，没有`master`分支 第一次先push
 
-自动部署路径 `/app` ，你可以绑定到宿主机的web目录
 
 
 # End
